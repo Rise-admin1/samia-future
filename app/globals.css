@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-grow-blue: #2F72F6;
+  --color-grow-green: #85CF44;
+  --color-grow-cyan: #33C8DD;
+  --color-grow-yellow: #FFBD62;
+}
+
+@layer base {
+  body {
+    @apply bg-grow-blue text-white overflow-x-hidden font-sans selection:bg-white selection:text-grow-blue;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Standardized typography & layout
+   ───────────────────────────────────────────────────────── */
+.page-container {
+  @apply px-4 sm:px-5 md:px-6;
+}
+
+.section-padding {
+  @apply py-16 sm:py-20 md:py-24 lg:py-32;
+}
+
+.content-narrow {
+  @apply max-w-4xl;
+}
+
+.content-default {
+  @apply max-w-5xl;
+}
+
+.content-wide {
+  @apply max-w-6xl;
+}
+
+/* Typography */
+.h1-page {
+  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase tracking-tighter leading-[0.9];
+}
+
+.h2-section {
+  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter leading-tight;
+}
+
+.h3-card {
+  @apply text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tighter;
+}
+
+.hero-tagline {
+  @apply text-base sm:text-lg md:text-xl font-bold tracking-tight;
+}
+
+.body-text {
+  @apply text-sm sm:text-base md:text-lg leading-relaxed;
+}
+
+.section-label {
+  @apply text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] sm:tracking-[0.35em];
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-widest transition-transform hover:scale-105;
+}
+
+.btn-primary-lg {
+  @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-5 rounded-2xl text-sm sm:text-base md:text-lg font-black uppercase tracking-widest transition-transform hover:scale-105;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-widest border-2 transition-colors;
+}
+
+.btn-outline-lg {
+  @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-5 rounded-2xl text-sm sm:text-base md:text-lg font-black uppercase tracking-widest border-2 transition-colors;
+}
+
+.screen-text {
+  @apply opacity-0 translate-y-10 transition-all duration-700;
+}
+
+.screen-text.visible {
+  @apply opacity-100 translate-y-0;
+}
+
+/* On mobile: show content immediately, no scroll-triggered pop-in */
+@media (max-width: 767px) {
+  .screen-text {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-grow-blue;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/20 rounded-full hover:bg-white/40 transition-colors;
+}
