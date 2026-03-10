@@ -72,7 +72,7 @@ export default function HomePage() {
 
       <main style={{ position: 'relative', zIndex: 10 }}>
         {/* ── Screen 1: Hero ── */}
-        <Screen className="bg-grow-blue text-center">
+        <Screen className="bg-grow-blue text-center pt-32 sm:pt-36 md:pt-40 lg:pt-44">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
