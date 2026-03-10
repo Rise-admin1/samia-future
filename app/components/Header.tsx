@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useContact } from '@/app/components/ContactProvider';
@@ -57,9 +58,20 @@ export function Header() {
       <header className="fixed top-0 left-0 right-0 z-40 page-container py-4 flex justify-between items-center bg-gradient-to-b from-grow-blue/80 to-transparent backdrop-blur-sm">
         <div className="flex items-center gap-4 flex-nowrap min-w-0">
           <a href="/" className="flex-shrink-0">
+            {/* Text logo - replaced with image
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black uppercase tracking-tighter leading-[0.9] whitespace-nowrap">
               <span className="text-grow-yellow">SAMIA</span> FUTURE
             </h1>
+            */}
+            {/* Logo image: place your file at public/logo.png (or .svg, .webp) */}
+            <Image
+              src="/logo-Photoroom.png"
+              alt="Samia Future"
+              width={360}
+              height={96}
+              className="h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32 2xl:h-36 w-auto object-contain"
+              priority
+            />
           </a>
           <h1 className="hidden lg:block text-[10px] uppercase font-bold tracking-[0.3em] opacity-60 max-w-[150px] leading-tight">
             A Future That Is Built, Not Waited For
