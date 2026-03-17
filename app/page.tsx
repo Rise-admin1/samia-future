@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useContact } from '@/app/components/ContactProvider';
+import AutoScrollBanner from '@/app/components/AutoScrollBanner';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -190,6 +191,17 @@ export default function HomePage() {
             </div>
           </div>
         </Screen>
+
+        {/* ── Our Work (banner) ── */}
+        <section className="page-container pt-28 md:pt-24 pb-12 sm:pb-16 md:pb-20 bg-white">
+          <div className="content-wide mx-auto w-full space-y-8">
+            <div className="screen-text text-center space-y-2">
+              <p className="section-label text-grow-blue/60">Spotlight</p>
+              <h2 className="h2-section text-grow-blue">Our Work</h2>
+            </div>
+            <AutoScrollBanner />
+          </div>
+        </section>
 
         {/* ── Screen 4: Rooted in Community ── */}
         <Screen className="bg-white text-grow-blue" id="calculator">

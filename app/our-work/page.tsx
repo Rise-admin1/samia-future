@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useContact } from '@/app/components/ContactProvider';
+import AutoScrollBanner from '@/app/components/AutoScrollBanner';
 import { cn } from '@/lib/utils';
 
 const Section = ({
@@ -42,6 +43,8 @@ export default function OurWorkPage() {
           individuals and institutions for the future.
         </p>
       </Section>
+
+      <AutoScrollBanner />
 
       {/* Programs */}
       <Section className="bg-white text-grow-blue" id="programs">
