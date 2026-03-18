@@ -8,15 +8,16 @@ export function Footer() {
         <p className="text-[10px] uppercase font-bold tracking-widest opacity-40">
           © Copyright Samia Future 2026
         </p>
-        <p className="text-[10px] uppercase font-bold tracking-widest opacity-60">
-          317 Runda Grove, Runda, Nairobi, Kenya.
-        </p>
+       
       </div>
       <div className="flex gap-8 text-[10px] uppercase font-bold tracking-widest opacity-60">
         <a href="#" className="hover:text-white transition-colors">Updates / News</a>
         <a href="#" className="hover:text-white transition-colors">Privacy & Legal</a>
         <a href="#" className="hover:text-white transition-colors">Social Media</a>
       </div>
+      <p className="text-[10px] uppercase font-bold tracking-widest opacity-60">
+          317 Runda Grove, Runda, Nairobi, Kenya.
+        </p>
     </footer>
   );
 }
