@@ -22,6 +22,7 @@ export const CheckoutDialog = ({
 }) => {
   const [amount, setAmount] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [method, setMethod] = useState<Method>('mpesa');
   const [cardMounted, setCardMounted] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -31,7 +32,7 @@ export const CheckoutDialog = ({
   const [statusMessage, setStatusMessage] = useState('');
   const [succeeded, setSucceeded] = useState(false);
 
-  const checkoutRequestIDRef = useRef<string | null>(null);
+  const paystackReferenceRef = useRef<string | null>(null);
   const pollingIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const paymentStatusRef = useRef<PaymentStatus>(null);
@@ -61,6 +62,7 @@ export const CheckoutDialog = ({
     clearPolling();
     setAmount('');
     setPhoneNumber('');
+    setEmail('');
     setMethod('mpesa');
     setCardMounted(false);
     setCopied(false);
@@ -69,7 +71,7 @@ export const CheckoutDialog = ({
     setPaymentStatus(null);
     setStatusMessage('');
     setSucceeded(false);
-    checkoutRequestIDRef.current = null;
+    paystackReferenceRef.current = null;
   };
 
   const handleClose = () => {
@@ -82,10 +84,10 @@ export const CheckoutDialog = ({
     setTimeout(resetState, 300);
   };
 
-  const checkPaymentStatus = async (checkoutRequestID: string) => {
+  const checkPaymentStatus = async (reference: string) => {
     try {
       const response = await fetch(
-        `${BACKEND_URL}/api/samia-future/status/${checkoutRequestID}`
+        `${BACKEND_URL}/api/samia-future/paystack/verify/${encodeURIComponent(reference)}`
       );
       const data = await response.json();
 
@@ -114,9 +116,17 @@ export const CheckoutDialog = ({
 
     const formattedPhone = formatPhoneNumber(phoneNumber);
     const kes = Math.round(Number(amount));
+    const trimmedEmail = email.trim();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail);
 
     if (!isValidKenyanPhone(formattedPhone)) {
       setMpesaMessage('Please enter a valid phone number (e.g. 072xxxxxxx).');
+      setMpesaLoading(false);
+      return;
+    }
+
+    if (!emailOk) {
+      setMpesaMessage('Please enter a valid email address.');
       setMpesaLoading(false);
       return;
     }
@@ -128,22 +138,26 @@ export const CheckoutDialog = ({
     }
 
     try {
-      const response = await fetch(`${BACKEND_URL}/api/samia-future/stkpush`, {
+      const response = await fetch(`${BACKEND_URL}/api/samia-future/paystack/mpesa`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phoneNumber: formattedPhone, amount: kes }),
+        body: JSON.stringify({
+          phoneNumber: formattedPhone,
+          amount: kes,
+          email: trimmedEmail,
+        }),
       });
       const data = await response.json();
 
-      if (data.status && data.checkoutRequestID) {
-        setMpesaMessage('Check your phone and enter your M-Pesa PIN.');
+      if (data.status && data.reference) {
+        setMpesaMessage(data.msg || 'Check your phone and enter your M-Pesa PIN.');
         setPaymentStatus('pending');
         setStatusMessage('Waiting for payment confirmation…');
-        checkoutRequestIDRef.current = data.checkoutRequestID;
+        paystackReferenceRef.current = data.reference;
 
         pollingIntervalRef.current = setInterval(() => {
-          if (checkoutRequestIDRef.current) {
-            checkPaymentStatus(checkoutRequestIDRef.current);
+          if (paystackReferenceRef.current) {
+            checkPaymentStatus(paystackReferenceRef.current);
           }
         }, 3000);
 
@@ -156,8 +170,8 @@ export const CheckoutDialog = ({
         }, 300000);
 
         setTimeout(() => {
-          if (checkoutRequestIDRef.current) {
-            checkPaymentStatus(checkoutRequestIDRef.current);
+          if (paystackReferenceRef.current) {
+            checkPaymentStatus(paystackReferenceRef.current);
           }
         }, 2000);
       } else {
@@ -210,7 +224,7 @@ export const CheckoutDialog = ({
 
             {succeeded ? (
               <div className="text-center space-y-6 py-8">
-                <h2 className="text-4xl font-black uppercase tracking-tighter">Asante</h2>
+                <h2 className="text-4xl font-black uppercase tracking-tighter">Thank You</h2>
                 <p className="text-lg text-grow-blue/80">
                   Your support helps Samia Future keep these activities going.
                 </p>
@@ -272,6 +286,20 @@ export const CheckoutDialog = ({
 
                 <div className={method === 'mpesa' ? 'block' : 'hidden'}>
                   <form onSubmit={handleMpesaSubmit} className="space-y-6">
+                    <div>
+                      <label htmlFor="mpesa-email" className="block text-xs font-bold uppercase tracking-widest mb-2">
+                        Email
+                      </label>
+                      <input
+                        id="mpesa-email"
+                        type="email"
+                        placeholder="you@example.com"
+                        className="w-full text-xl font-bold border-b-2 border-grow-blue/20 py-4 focus:outline-none focus:border-grow-blue transition-colors"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required={method === 'mpesa'}
+                      />
+                    </div>
                     <div>
                       <label htmlFor="mpesa-phone" className="block text-xs font-bold uppercase tracking-widest mb-2">
                         M-Pesa phone
