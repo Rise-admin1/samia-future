@@ -1,29 +1,13 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ACTIVITIES, type ActivityCard } from '@/lib/activities';
+import Image from 'next/image';
+import { ACTIVITIES } from '@/lib/activities';
 import { useCheckout } from '@/app/components/CheckoutProvider';
 
-const accentClass: Record<ActivityCard['accent'], string> = {
-  yellow: 'bg-grow-yellow',
-  green: 'bg-grow-green',
-  cyan: 'bg-grow-cyan',
-  white: 'bg-white',
-};
-
 export function ActivityCarousel() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
   const { openCheckout } = useCheckout();
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
-
-  const scrollByCard = (direction: -1 | 1) => {
-    const node = scrollerRef.current;
-    if (!node) return;
-    const card = node.querySelector<HTMLElement>('[data-activity-card]');
-    const delta = (card?.offsetWidth ?? 320) + 16;
-    node.scrollBy({ left: direction * delta, behavior: 'smooth' });
-  };
 
   const handlePointerDown = (e: React.PointerEvent) => {
     pointerStart.current = { x: e.clientX, y: e.clientY };
@@ -40,28 +24,8 @@ export function ActivityCarousel() {
   };
 
   return (
-    <div className="relative">
-      <button
-        type="button"
-        onClick={() => scrollByCard(-1)}
-        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 items-center justify-center rounded-full bg-white text-grow-blue shadow-lg"
-        aria-label="Previous activity"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button
-        type="button"
-        onClick={() => scrollByCard(1)}
-        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 items-center justify-center rounded-full bg-white text-grow-blue shadow-lg"
-        aria-label="Next activity"
-      >
-        <ChevronRight size={24} />
-      </button>
-
-      <div
-        ref={scrollerRef}
-        className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory px-1 md:px-14 pb-4"
-      >
+    <div className="content-wide mx-auto w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         {ACTIVITIES.map((activity) => (
           <article
             key={activity.id}
@@ -76,14 +40,31 @@ export function ActivityCarousel() {
                 openCheckout();
               }
             }}
-            className="snap-center shrink-0 w-[80vw] sm:w-[360px] cursor-pointer rounded-3xl border border-white/15 bg-white/[0.06] backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-white/25 hover:bg-white/[0.08]"
+            className="group flex h-full flex-col cursor-pointer rounded-2xl sm:rounded-3xl border border-white/15 bg-white/[0.06] backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-white/25 hover:bg-white/[0.08]"
           >
-            <div className={`h-40 sm:h-48 ${accentClass[activity.accent]}`} aria-hidden />
-            <div className="p-6 sm:p-8">
-              <p className="section-label text-white/50 mb-3">{activity.label}</p>
-              <h3 className="h3-card text-white mb-3">{activity.title}</h3>
-              <p className="body-text text-white/90 mb-6">{activity.body}</p>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-grow-yellow">
+            <div className="relative w-full aspect-[4/5] md:hidden bg-white/10">
+              <Image
+                src={activity.imageMobile}
+                alt={activity.imageAlt}
+                fill
+                className="object-cover object-center"
+                sizes="100vw"
+              />
+            </div>
+            <div className="relative hidden md:block w-full aspect-[16/10] lg:aspect-[2/1] bg-white/10">
+              <Image
+                src={activity.image}
+                alt={activity.imageAlt}
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1280px) 50vw, 640px"
+              />
+            </div>
+            <div className="flex flex-1 flex-col p-5 sm:p-6 md:p-8">
+              <p className="section-label text-white/50 mb-2 sm:mb-3">{activity.label}</p>
+              <h3 className="h3-card text-white mb-2 sm:mb-3">{activity.title}</h3>
+              <p className="body-text text-white/90 mb-4 sm:mb-6 flex-1">{activity.body}</p>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-grow-yellow">
                 Tap to support
               </p>
             </div>

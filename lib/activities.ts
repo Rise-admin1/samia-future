@@ -3,50 +3,28 @@ export type ActivityCard = {
   label: string;
   title: string;
   body: string;
-  accent: 'yellow' | 'green' | 'cyan' | 'white';
+  image: string;
+  imageMobile: string;
+  imageAlt: string;
 };
 
 export const ACTIVITIES: ActivityCard[] = [
   {
-    id: 'leadership',
-    label: 'Programs',
-    title: 'Leadership Education',
-    body: 'Workshops and seminars that build confidence, consciousness, and a future-ready mindset for youth and emerging leaders.',
-    accent: 'yellow',
-  },
-  {
-    id: 'enterprise',
+    id: 'women-expo',
     label: 'Enterprise',
-    title: 'Business Clinics & Expos',
-    body: 'Practical support for micro and small enterprises through clinics, expos, and opportunity-linkage forums.',
-    accent: 'green',
+    title: 'Samia Women Business Expo',
+    body: 'The upcoming Samia Women Business Expo is an initiative that focuses on mobilizing and empowering women through entrepreneurship and business collaboration.',
+    image: '/banner-1.jpeg',
+    imageMobile: '/banner-1-portrait.jpeg',
+    imageAlt: 'Samia Women Business Expo',
   },
   {
-    id: 'youth',
+    id: 'outreach',
     label: 'Community',
-    title: 'Youth Leadership',
-    body: 'Spaces where young people practise leadership, collaboration, and civic participation in Samia communities.',
-    accent: 'cyan',
-  },
-  {
-    id: 'consultancy',
-    label: 'Advisory',
-    title: 'Community Consultancy',
-    body: 'Advisory support that helps grassroots groups turn ideas into structured, lasting initiatives.',
-    accent: 'white',
-  },
-  {
-    id: 'mentorship',
-    label: 'Growth',
-    title: 'Mentorship',
-    body: 'One-to-one and group mentorship that connects emerging talent with experienced practitioners.',
-    accent: 'yellow',
-  },
-  {
-    id: 'grassroots',
-    label: 'Impact',
-    title: 'Grassroots Enterprise',
-    body: 'Skills, networks, and platforms that strengthen local livelihoods and inclusive economic participation.',
-    accent: 'green',
+    title: 'Community Outreach',
+    body: 'Community outreach design for the Samia Women Business Expo highlights efforts to bring women together to share ideas, build business groups, and expand economic opportunities.',
+    image: '/banner-2.jpeg',
+    imageMobile: '/banner-2-portrait.jpeg',
+    imageAlt: 'Community outreach for the Samia Women Business Expo',
   },
 ];

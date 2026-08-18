@@ -33,11 +33,11 @@ export default function ActivitiesPage() {
         <div className="relative content-default mx-auto text-center w-full">
           <h1 className="h1-page mb-6 sm:mb-8 text-white">Activities</h1>
           <p className="hero-tagline text-white/80 max-w-2xl mx-auto mb-6">
-            Practical work that builds leadership, enterprise, and community progress across Samia.
+            Practical initiatives that develop leadership, strengthen enterprise, and advance community progress.
           </p>
           <p className="body-text text-white/90 max-w-3xl mx-auto">
-            These activities are how the foundation shows up: training rooms, business clinics, youth forums,
-            and grassroots support. Tap any card to contribute.
+            Samia Future operates as a catalytic hub for community empowerment. Our work integrates education,
+            mentorship, enterprise support, and consultancy. Tap any card to contribute.
           </p>
         </div>
       </section>

@@ -374,12 +374,7 @@ export const CheckoutDialog = ({
                           </button>
                         </div>
                       </div>
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-grow-blue/50 mb-2">
-                          Mail to
-                        </p>
-                        <p className="font-bold">{CHEQUE_ADDRESS}</p>
-                      </div>
+                     
                     </div>
                   </div>
                 </div>
