@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { ContactProvider } from '@/app/components/ContactProvider';
+import { CheckoutProvider } from '@/app/components/CheckoutProvider';
 import { Header } from '@/app/components/Header';
 import { Footer } from '@/app/components/Footer';
 
@@ -18,9 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-grow-blue text-white overflow-x-hidden font-sans selection:bg-white selection:text-grow-blue">
         <ContactProvider>
-          <Header />
-          {children}
-          <Footer />
+          <CheckoutProvider>
+            <Header />
+            {children}
+            <Footer />
+          </CheckoutProvider>
         </ContactProvider>
       </body>
     </html>

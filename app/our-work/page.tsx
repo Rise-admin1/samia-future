@@ -136,6 +136,12 @@ export default function OurWorkPage() {
         </h2>
         <div className="flex flex-col items-center gap-3 sm:gap-4">
           <Link
+            href="/activities"
+            className="btn-outline border-grow-blue text-grow-blue hover:bg-grow-blue hover:text-white w-full sm:w-auto"
+          >
+            See our activities
+          </Link>
+          <Link
             href="/#calculator"
             className="btn-primary bg-grow-blue text-white shadow-lg w-full sm:w-auto"
           >

@@ -108,3 +108,12 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-white/20 rounded-full hover:bg-white/40 transition-colors;
 }
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
