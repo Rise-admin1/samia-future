@@ -25,7 +25,7 @@ export function ActivityCarousel() {
 
   return (
     <div className="content-wide mx-auto w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {ACTIVITIES.map((activity) => (
           <article
             key={activity.id}
@@ -42,24 +42,28 @@ export function ActivityCarousel() {
             }}
             className="group flex h-full flex-col cursor-pointer rounded-2xl sm:rounded-3xl border border-white/15 bg-white/[0.06] backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-white/25 hover:bg-white/[0.08]"
           >
-            <div className="relative w-full aspect-[4/5] md:hidden bg-white/10">
-              <Image
-                src={activity.imageMobile}
-                alt={activity.imageAlt}
-                fill
-                className="object-cover object-center"
-                sizes="100vw"
-              />
-            </div>
-            <div className="relative hidden md:block w-full aspect-[16/10] lg:aspect-[2/1] bg-white/10">
-              <Image
-                src={activity.image}
-                alt={activity.imageAlt}
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1280px) 50vw, 640px"
-              />
-            </div>
+            {activity.imageMobile && (
+              <div className="relative w-full aspect-[4/5] md:hidden bg-white/10">
+                <Image
+                  src={activity.imageMobile}
+                  alt={activity.imageAlt || activity.title}
+                  fill
+                  className="object-cover object-center"
+                  sizes="100vw"
+                />
+              </div>
+            )}
+            {activity.image && (
+              <div className="relative hidden md:block w-full aspect-[16/10] lg:aspect-[2/1] bg-white/10">
+                <Image
+                  src={activity.image}
+                  alt={activity.imageAlt || activity.title}
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1280px) 50vw, 640px"
+                />
+              </div>
+            )}
             <div className="flex flex-1 flex-col p-5 sm:p-6 md:p-8">
               <p className="section-label text-white/50 mb-2 sm:mb-3">{activity.label}</p>
               <h3 className="h3-card text-white mb-2 sm:mb-3">{activity.title}</h3>

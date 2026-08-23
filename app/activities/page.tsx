@@ -22,35 +22,28 @@ export default function ActivitiesPage() {
 
   return (
     <main className="relative pt-24 md:pt-28" style={{ zIndex: 10 }}>
-      <section className="min-h-[50vh] sm:min-h-[55vh] flex flex-col justify-center page-container pt-28 pb-12 sm:pb-16 bg-grow-blue relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: '32px 32px',
-          }}
-        />
-        <div className="relative content-default mx-auto text-center w-full">
-          <h1 className="h1-page mb-6 sm:mb-8 text-white">Activities</h1>
-          <p className="hero-tagline text-white/80 max-w-2xl mx-auto mb-6">
-            Practical initiatives that develop leadership, strengthen enterprise, and advance community progress.
-          </p>
-          <p className="body-text text-white/90 max-w-3xl mx-auto">
-            Samia Future operates as a catalytic hub for community empowerment. Our work integrates education,
-            mentorship, enterprise support, and consultancy. Tap any card to contribute.
-          </p>
-        </div>
-      </section>
-
-      <Section className="bg-grow-blue pt-0">
+      <Section className="bg-grow-blue">
+        <h1 className="sr-only">Activities</h1>
         <ActivityCarousel />
       </Section>
 
       <Section className="bg-grow-yellow text-grow-blue text-center">
         <h2 className="h2-section mb-6">Support these activities</h2>
-        <p className="body-text max-w-2xl mx-auto mb-8 text-grow-blue/90">
-          Every contribution helps the Michael Trufosa Clarice Mugenya Foundation keep this work moving.
+        <p className="body-text max-w-3xl mx-auto mb-6 text-grow-blue/90">
+          None of this happens on goodwill alone. Every Expo seated, every women&apos;s group
+          organized, every artist given the materials to finish a commissioned piece: all of it is
+          funded, tracked, and delivered because Samia Future backs MTCM Foundation to do it.
+          That&apos;s the arrangement. We provide the resourcing, MTCM Foundation puts it to work
+          where it&apos;s needed, on the ground, in the communities these activities serve.
         </p>
+        <p className="body-text max-w-3xl mx-auto mb-8 text-grow-blue/90">
+          Your contribution doesn&apos;t sit in a general fund. It goes toward whichever activity
+          you tap to support, and it goes there through a partner we&apos;ve chosen precisely
+          because they deliver.
+        </p>
+        <h3 className="text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tighter mb-6">
+          Support Your Way
+        </h3>
         <button
           type="button"
           onClick={openCheckout}
